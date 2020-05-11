@@ -78,7 +78,6 @@ public class polynomial {
 						 j.next.exp = temp;
 					 }
 				 }
-			 System.out.println("the list has been sorted in descending order of exponent");
 	     }
 	
 	
@@ -157,6 +156,8 @@ public static void main(String[] args) {
 		
 		while(true)
 		{
+		System.out.println("Welcome to MENU");
+		System.out.println("____________________________");
 		System.out.println("1: Show 1st polynomial");
 		System.out.println("2: Show 2nd polynomial");
 		System.out.println("3: Display result after addition");
@@ -188,5 +189,3 @@ public static void main(String[] args) {
 
 
 }
-
-
