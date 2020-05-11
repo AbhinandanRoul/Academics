@@ -1,21 +1,20 @@
-import java.util.Scanner;
+package testing;
 
+import java.util.*;
 class Node {
-	
+
 	int coef;
 	int exp;
 	Node next;
 }
-
-public class polynomial
-{
+public class polynomial {
 	static Node poly1 = null;
 	static Node poly2= null;
 	static Node q;
 	static Scanner sc = new Scanner(System.in);
-	public static Node create(Node start) 
+	public static Node create(Node start)
 	{
-		
+
 		int ch;
 		Node p = new Node();
 		//System.out.println("Accepting Data for Polynomial");
@@ -26,10 +25,10 @@ public class polynomial
 	    p.exp=sc.nextInt();
 		p.next = null;
 		if (start == null) {
-			start = p;		
+			start = p;
 			q = p;
 		}
-	
+
 		System.out.println("To continue press 1");
 		System.out.println("To start entering data for new polynomial press 2");
 		ch=sc.nextInt();
@@ -50,10 +49,10 @@ public class polynomial
 		}
 		return start;
 	}
-	
 
-	
-	public static void display(Node start) 
+
+
+	public static void display(Node start)
 	{
 		System.out.println("The polynomial is:");
 		Node s = start;
@@ -63,10 +62,27 @@ public class polynomial
 		}
 		System.out.println("0");
 	}
-	
-	
-	
-	
+
+
+	//sorting
+		public static void Bsort(Node s) {
+			 Node i=new Node ();
+			 Node j= new Node();
+			 for (i=s;i.next!=null;i=i.next)
+				 for(j=s;j.next!=null;j=j.next) {
+					 if(j.exp<j.next.exp) {
+						 int temp=0;
+						 temp = j.exp;
+						 j.exp = j.next.exp;
+						 j.next.exp = temp;
+					 }
+				 }
+			 System.out.println("the list has been sorted in descending order of exponent");
+	     }
+
+
+
+
 	static void poly_add(Node poly1, Node poly2)
 	{
 		Node ptr1;
@@ -75,8 +91,8 @@ public class polynomial
 		ptr2=poly2;
 		Node ptr=new Node();
 		Node poly=ptr;
-		
-		while((ptr1.next!=null) || (ptr2.next!=null))
+
+		while((ptr1!=null) && (ptr2!=null))
 		{
 			if(ptr1.exp>ptr2.exp) // The term with higher exponent is added first
 			{
@@ -97,38 +113,33 @@ public class polynomial
 				ptr.exp=ptr1.exp;
 				ptr1=ptr1.next;
 				ptr2=ptr2.next;
-				
+
 			}
-			
+
 			ptr.next=new Node();
 			ptr=ptr.next;
-			
-			
+
+
 		}
-		
-		if(ptr1.next==null || ptr2.next==null)
-		{
-			if(ptr1.exp==ptr2.exp)
-			{
-				ptr.next=new Node();
-				ptr=ptr.next;
-				ptr.coef=ptr1.coef+ptr2.coef;
-			
-			}
-			else
-			{
-				ptr.next=new Node();
-				ptr=ptr.next;
-				ptr.coef=ptr1.coef;
-				ptr.exp=ptr1.exp;
-				ptr.next=new Node();
-				ptr=ptr.next;
-				ptr.coef=ptr2.coef;
-				ptr.exp=ptr2.exp;
-			}
-		}	
+		while(ptr2 !=null) {
+
+			ptr.coef=ptr2.coef;
+			ptr.exp=ptr2.exp;
+			ptr2=ptr2.next;
+			ptr.next=new Node();
+			ptr=ptr.next;
+		}
+		while (ptr1!=null) {
+			ptr.coef=ptr1.coef;
+			ptr.exp=ptr1.exp;
+			ptr1=ptr1.next;
+
+		    ptr.next=new Node();
+			ptr=ptr.next;
+		}
+
 		ptr.next=null;
-			
+
 	display(poly);
 
 	}
@@ -137,12 +148,15 @@ public class polynomial
 public static void main(String[] args) {
 	System.out.println("Accepting data for 1st Polynomial");
 		poly1=create(poly1);
+		Bsort(poly1);
 	System.out.println("Accepting Data for 2nd Polynomial");
 		poly2=create(poly2);
+		Bsort(poly2);
 	System.out.println("Displaying Both the Polynomials");
 		display(poly1);
 		display(poly2);
 	System.out.println("After ADDITION");
 		poly_add(poly1, poly2);
 		}
- }
+
+}
