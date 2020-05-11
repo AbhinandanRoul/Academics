@@ -34,7 +34,7 @@ public class Linked_List {
 			}
 			System.out.println("Enter Y to add next value in node.");
 			ch = in.next().charAt(0);
-		} while (ch == 'Y');
+		} while (ch == 'Y'|| ch=='y');
 		return start;
 	}
 
