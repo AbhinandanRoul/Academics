@@ -1,14 +1,15 @@
-import java.util.Scanner;
-
+/*Abhinandan Roul
+ * 1941012359
+ * CSE-J
+ */
+import java.util.*;
 class Node {
 	
 	int coef;
 	int exp;
 	Node next;
 }
-
-public class polynomial
-{
+public class polynomial {
 	static Node poly1 = null;
 	static Node poly2= null;
 	static Node q;
@@ -20,9 +21,9 @@ public class polynomial
 		Node p = new Node();
 		//System.out.println("Accepting Data for Polynomial");
 		System.out.println("Enter the 1st term of the polynomial");
-		System.out.println("Input coef");
+		System.out.println("Enter coefficient");
 		p.coef = sc.nextInt();
-		System.out.println("Input Exponent");
+		System.out.println("Enter Exponent");
 	    p.exp=sc.nextInt();
 		p.next = null;
 		if (start == null) {
@@ -55,7 +56,6 @@ public class polynomial
 	
 	public static void display(Node start) 
 	{
-		System.out.println("The polynomial is:");
 		Node s = start;
 		while (s != null) {
 			System.out.print(s.coef+"X^"+s.exp+"+");
@@ -63,6 +63,23 @@ public class polynomial
 		}
 		System.out.println("0");
 	}
+	
+	
+	
+		public static void sort(Node start) {
+			 Node i=new Node ();
+			 Node j= new Node();
+			 for (i=start;i.next!=null;i=i.next)
+				 for(j=start;j.next!=null;j=j.next) {
+					 if(j.exp<j.next.exp) {
+						 int temp=0;
+						 temp = j.exp;
+						 j.exp = j.next.exp;
+						 j.next.exp = temp;
+					 }
+				 }
+			 System.out.println("the list has been sorted in descending order of exponent");
+	     }
 	
 	
 	
@@ -76,7 +93,7 @@ public class polynomial
 		Node ptr=new Node();
 		Node poly=ptr;
 		
-		while((ptr1.next!=null) || (ptr2.next!=null))
+		while((ptr1!=null) && (ptr2!=null))
 		{
 			if(ptr1.exp>ptr2.exp) // The term with higher exponent is added first
 			{
@@ -105,28 +122,23 @@ public class polynomial
 			
 			
 		}
-		
-		if(ptr1.next==null || ptr2.next==null)
-		{
-			if(ptr1.exp==ptr2.exp)
-			{
-				ptr.next=new Node();
-				ptr=ptr.next;
-				ptr.coef=ptr1.coef+ptr2.coef;
+		while(ptr2 !=null) {
 			
-			}
-			else
-			{
-				ptr.next=new Node();
-				ptr=ptr.next;
-				ptr.coef=ptr1.coef;
-				ptr.exp=ptr1.exp;
-				ptr.next=new Node();
-				ptr=ptr.next;
-				ptr.coef=ptr2.coef;
-				ptr.exp=ptr2.exp;
-			}
-		}	
+			ptr.coef=ptr2.coef;
+			ptr.exp=ptr2.exp;
+			ptr2=ptr2.next;
+			ptr.next=new Node();
+			ptr=ptr.next;
+		}
+		while (ptr1!=null) {
+			ptr.coef=ptr1.coef;
+			ptr.exp=ptr1.exp;
+			ptr1=ptr1.next;
+
+		    ptr.next=new Node();
+			ptr=ptr.next;
+		}
+		
 		ptr.next=null;
 			
 	display(poly);
@@ -135,14 +147,46 @@ public class polynomial
 
 
 public static void main(String[] args) {
+	
 	System.out.println("Accepting data for 1st Polynomial");
 		poly1=create(poly1);
+		sort(poly1);
 	System.out.println("Accepting Data for 2nd Polynomial");
 		poly2=create(poly2);
-	System.out.println("Displaying Both the Polynomials");
-		display(poly1);
-		display(poly2);
-	System.out.println("After ADDITION");
-		poly_add(poly1, poly2);
+		sort(poly2);
+		
+		while(true)
+		{
+		System.out.println("1: Show 1st polynomial");
+		System.out.println("2: Show 2nd polynomial");
+		System.out.println("3: Display result after addition");
+		System.out.println("0: Exit");
+		System.out.println("Enter your choice");
+		int n=sc.nextInt();
+		switch(n)
+		{
+		case 1:
+			System.out.println("The value of 1st polynomial");
+			display(poly1);
+			break;
+		case 2:
+			System.out.println("The value of 2nd polynomial");
+			display(poly2);
+			break;
+		case 3:
+			System.out.println("The result of Addition is:");
+			poly_add(poly1,poly2);
+			break;
+		case 0:
+			System.out.println("Thank You!"+"\n"+"You've successfully exited the program");
+			System.exit(0);
+			break;
 		}
- }
+	}
+
+}
+
+
+}
+
+
