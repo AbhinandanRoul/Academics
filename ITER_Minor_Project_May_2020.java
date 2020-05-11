@@ -137,11 +137,12 @@ public class polynomial
 public static void main(String[] args) {
 	System.out.println("Accepting data for 1st Polynomial");
 		poly1=create(poly1);
-		display(poly1);
-		System.out.println("Accepting Data for 2nd Polynomial");
+	System.out.println("Accepting Data for 2nd Polynomial");
 		poly2=create(poly2);
+	System.out.println("Displaying Both the Polynomials");
+		display(poly1);
 		display(poly2);
-		System.out.println("After ADDITION");
+	System.out.println("After ADDITION");
 		poly_add(poly1, poly2);
 		}
  }
