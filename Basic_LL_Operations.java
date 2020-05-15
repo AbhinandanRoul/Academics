@@ -254,8 +254,11 @@ public class Linked_List {
 				if(j.mark<j.next.mark)
 				{
 					float temp=j.mark;
+					int tmp=j.regd_no;
 					j.mark=j.next.mark;
+					j.regd_no=j.next.regd_no;
 					j.next.mark=temp;
+					j.next.regd_no=tmp;
 				}
 			}
 		}
