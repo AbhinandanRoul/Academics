@@ -73,9 +73,13 @@ public class polynomial {
 				 for(j=start;j.next!=null;j=j.next) {
 					 if(j.exp<j.next.exp) {
 						 int temp=0;
+						 int tm=0;
+						 tm=j.coef;
 						 temp = j.exp;
 						 j.exp = j.next.exp;
+						 j.coef=j.next.coef;
 						 j.next.exp = temp;
+						 j.next.coef=tm;
 					 }
 				 }
 	     }
@@ -157,7 +161,7 @@ public static void main(String[] args) {
 		while(true)
 		{
 		System.out.println("Welcome to MENU");
-		System.out.println("____________________________");
+		System.out.println("-------------------------------------------------");
 		System.out.println("1: Show 1st polynomial");
 		System.out.println("2: Show 2nd polynomial");
 		System.out.println("3: Display result after addition");
