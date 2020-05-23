@@ -8,6 +8,7 @@ public class Stack {
 			System.out.println("Stack is full");
 		else
 		{
+			System.out.println("Enter an element");
 			int item=in.nextInt();
 			top=top+1;
 			S[top]=item;
@@ -35,6 +36,7 @@ public class Stack {
 	
 	public static void display(int S[],int top)
 	{	
+		System.out.println("The elements in your stack are:");
 		while(top!=-1)
 		{
 			System.out.println(S[top]);
@@ -96,7 +98,10 @@ public class Stack {
 	switch(choice)
 	{
 	case 0:
+		System.out.println("Thank You!");
 		System.exit(0);
+		
+		break;
 	case 1:
 		top=push(stack,top);
 	break;
@@ -117,6 +122,6 @@ public class Stack {
 
 	}
 	}
-	}
+	}	
 }
 	
