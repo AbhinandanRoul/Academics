@@ -90,7 +90,7 @@ public class Stack {
 	System.out.println("2: Pop");
 	System.out.println("3: Display");
 	System.out.println("4: Check if the stack is empty");
-	System.out.println("5: Check if the satck is full ");
+	System.out.println("5: Check if the stack is full ");
 	System.out.println("Enter your choice");
 	int choice=in.nextInt();
 	switch(choice)
