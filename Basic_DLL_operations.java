@@ -1,352 +1,308 @@
-import java.util.Scanner;
-
-class Node
+/*Abhinandan Roul
+*CSE-J
+*1941012359
+*/
+import java.util.*;
+class Node 
 {
 	protected int regd_no;
 	protected float mark;
 	protected Node next;
 	protected Node prev;
+
 }
 
-
-public class Double_Linked_List 
+public class Double_Linked_List_Student_Marks 
 {
-	static Scanner in=new Scanner(System.in);
-	//static Node start;
-	//static Node end;
-	
-	
-	//Creating a NODE
-	public static Node create(Node start, Node end)
-	{
-		Node k=new Node();
-		System.out.println("Enter the registration number ");
-		k.regd_no=in.nextInt();
-		System.out.println("Enter the marks");
-		k.mark=in.nextInt();
-		k.next=k.prev=null;// as this is the 1st node next and prev is null
-		start=end=k;
-		System.out.println("Enter 1 to continue and 2 to stop");
-		int choice=in.nextInt();
-		
-		// Loop to continue adding data
-		while(choice==1)
-		{
-			Node k1=new Node();
-			System.out.println("Enter the registration number ");
-			k1.regd_no=in.nextInt();
-			System.out.println("Enter the marks");
-			k1.mark=in.nextInt();
-			k1.next=k1.prev=null;
-			end.next=k1;
-			k1.prev=end;
-			end=k1;
-			System.out.println("Enter 1 to continue and 2 to stop");
-			choice =in.nextInt();
 
-		}
-		return start;
-	}
-	
-	
-	// Inserting  a Node at Beginning
-	public static Node insBeg(Node start, Node end)
+	static Scanner in = new Scanner(System.in);
+
+	public static Node create(Node start, Node end) 
 	{
-		Node p=new Node();
-		//p=start;
-		System.out.println("Enter the registration number to be inserted in the beginning.");
-		p.regd_no=in.nextInt();
-		System.out.println("Enter the marks to be inserted to the beginning");
-		p.mark=in.nextFloat();
-		p.next=null;
-		p.prev=null;
+
+		Node p = new Node();
+		Node q;
 		
-		if(start==null|| end==null)
+		System.out.println("Enter the registration number:");
+		p.regd_no = in.nextInt();
+		System.out.println("Enter the marks:");
+		p.mark = in.nextFloat();
+		
+		p.next = p.prev = null;
+		start = end = p;
+		System.out.println("To continue press 1");
+		int option = in.nextInt();
+		while (option == 1) 
 		{
-			start=end=p;
-		}
-		else
-		{
-			p.next=start; // p is the new node and it links to the initial start node
-			start.prev=p; // p is the previous node of initial start node
-			start=p; //
+			q = new Node();
+			System.out.println("Enter the registration number:");
+			q.regd_no = in.nextInt();
+			System.out.println("Enter the Marks");
+			q.mark = in.nextFloat();
+			q.next = q.prev = null;
+			p.next = q;
+			q.prev = p;
+			p = q;
+			end = p;
+			System.out.println("to continue press 1");
+			option = in.nextInt();
 		}
 		return start;
 	}
-	
-	
-	//Inserting a Node at End
+
+	// Insertion at the beginning
+	public static Node insBeg(Node start, Node end) 
+	{
+
+		Node p = new Node();
+		System.out.println("Enter the Registration number");
+		p.regd_no = in.nextInt();
+		System.out.println("Enter Mark");
+		p.mark = in.nextInt();
+		p.next = null;
+		p.prev = null;
+
+		if (start == null || end == null) 
+		{
+
+			start = end = p;
+		}
+
+		else 
+		{
+			start.prev = p;
+			p.next = start;
+			start = p;
+		}
+		return start;
+	}
+
+	// Insertion at the end
 	public static Node insEnd(Node start, Node end)
 	{
-		
-		
-		Node p=new Node();
-		System.out.println("Enter the registration number to be inserted at the End");
-		p.regd_no=in.nextInt();
-		System.out.println("Enter the marks to be inserted at the End");
-		p.mark=in.nextFloat();
-		p.next=null;
-		p.prev=null;
-		
-		if(start==null|| end==null)
-		{
-		start=end=p;
-		}
+
+		Node p = new Node();
+		end = start;
+		System.out.println("Enter the Registration number");
+		p.regd_no = in.nextInt();
+		System.out.println("Enter Mark");
+		p.mark = in.nextInt();
+		p.next = null;
+		p.prev = null;
+		if (start == null || end == null) {
+			start = end = p;
+		} 
 		else
 		{
-			p.prev=end;
-			end.next=p;
-			end=p;
+			while (end.next != null)
+			{
+				end = end.next;
+			}
+			end.next = p;
+			p.prev = end;
+
 		}
 		return start;
 	}
-	
-	
-	//Inserting a Node at any position
+
+	// Insertion at any position
 	public static Node insAny(Node start, Node end)
 	{
-		//Creating a node to enter data
-		Node p=new Node();
-		System.out.println("Enter the registration number to be inserted");
-		p.regd_no=in.nextInt();
-		System.out.println("Enter the marks to be inserted ");
-		p.mark=in.nextFloat();
-		System.out.println("Enter the location where you want the element ot be inserted");
-		int loc=in.nextInt();
-		p.next=null;
-		p.prev=null;
-		
-		int c=count(start);
-		
-		//Insert at beginning
-		if(loc>=1 && loc<=c+1)
+
+		Node p = new Node();
+		System.out.println("Enter the location in which you want to insert");
+		int loc = in.nextInt();
+		System.out.println("Enter the Registration number");
+		p.regd_no = in.nextInt();
+		System.out.println("Enter the mark");
+		p.mark = in.nextFloat();
+		p.next = null;
+		p.prev = null;
+
+		Node s = start;
+		int i = 1;
+
+		while (i < loc - 1)
 		{
-			if(loc==1)
-			{
-				if(start==null)
-					start=end=p;
-			}
-			else
-			{
-				p.next=start;
-				p.prev=null;
-				start.prev=null;
-				start=p;
-			}
+
+			i++;
+			s = s.next;
 		}
-		
-		//Insert at End
-		else if(loc==c+1)
-		{
-			end.next=p;
-			p.prev=end;
-			end=p;
-		}
-		
-		//Insert at Specific
-		else
-		{
-			Node s=start;
-			int i=1;
-			while(i<loc-1)
-			{
-				i=i+1;
-				s=s.next;
-			}
-			p.next=s.next;
-			p.prev=s;
-			s.next=p;
-			s.next.prev=p;
-		}
-		
+		p.next = s.next;
+		p.prev = s;
+		s.next = p;
+		s.next.prev = p;
+
 		return start;
-		
 	}
-	
-	//Counting the nodes
-	public static int count(Node start)
-	{
-		Node s=start;
-		int c=0;
-		while(s!=null)
-		{
-			c=c+1;
-			s=s.next;
-		}
-		return c;
-	}
-	
-	
-	// Delete at Beginning
+
+// Deletion at the beginning
 	public static Node delBeg(Node start, Node end)
 	{
-		if(start==null)
-			System.out.println("List is Empty");
-		else
+
+		if (start == null)
 		{
-			start=start.next;
-			start.prev=null;
+
+			System.out.println("List is empty");
 		}
-		System.out.println("The Beginning Node is deleted successfully");
-		
-		return start;
-	}
-	
-	
-	//Delete at End
-	public static Node delEnd(Node start, Node end)
-	{
-		if(start==null)
-			System.out.println("List is Empty");
-		else
+
+		else 
 		{
-			end=end.prev;
-			end.next=null;
+
+			start = start.next;
+			start.prev = null;
+
 		}
 		return start;
 	}
-	
-	
-	//Delete at Any Given Position
-	public static Node delAny(Node start, Node end)
-	{
-		System.out.println("Enter the location where you want ot delete");
-		int loc=in.nextInt();
-		
-		
-		int c=count(start);
-		if(loc==1)
-		{
-			start=start.next;
-			start.prev=null;
-		}
-		else if(loc==c)
-		{
-			end=end.prev;
-			end.next=null;
-		}
-		else
-		{
-			Node s=start;
-			int i=1;
-			while(i<loc)
-			{
-				i=i+1;
-				s=s.next;
-			}
-			s.prev.next=s.next;
-			s.next.prev=s.prev;
-			}
-		
-		return start;
-		}
-	
-	
-	
-	//Searching a student based on registration number
-	public static void Search(Node start)
+
+	// Deletion at the end
+	public static Node delEnd(Node start, Node end) 
 	{
 
-		Node s=start;
-		int flag=0;
-		int c=count(start);
-		if(start==null)
-			System.out.println("node is empty");
-		else
+		Node p = start;
+		end = new Node();
+
+		while (p.next != null) 
 		{
-		System.out.println("Enter the Regd no. of the student you want to update marks");
-		int reg=in.nextInt();
-		while(s!=null)
+
+			end = p;
+			p = p.next;
+		}
+		p.prev = null;
+		end.next = null;
+
+		return start;
+	}
+
+	// Deletion at any position
+	public static Node delAny(Node start, Node end) 
+	{
+
+		System.out.println("Enter the location in which you want to delete");
+		int loc = in.nextInt();
+
+		if (loc == 1) 
 		{
-			if(s.regd_no==reg)
+			start = start.next;
+			start.prev = null;
+		} 
+		else 
+		{
+			Node s = start;
+			int i = 1;
+			while (i < loc) 
 			{
-				System.out.println("Enter updated marks");
-				float new_mark=in.nextFloat();
-				s.mark=new_mark;
+				i++;
+				s = s.next;
+			}
+			s.prev.next = s.next;
+			s.next.prev = s.prev;
+			System.out.println(s.regd_no + " deleted");
+		}
+
+		return start;
+	}
+
+	// searching in double linked list
+
+	public static void search(Node start) {
+		int flag = 0;
+		Node p = start;
+		System.out.println("Enter the Registration number you want to search");
+		int element = in.nextInt();
+		while (p != null) {
+			if (p.regd_no == element) {
+				System.out.println("Registration number found :" + p);
+				System.out.println("Enter the mark to be updated :");
+				float m = in.nextFloat();
+				p.mark = m;
+				System.out.println("Mark updated");
 				flag=1;
 			}
-			s=s.next;
-			
+			p = p.next;
 		}
-		if(flag==0)
-		System.out.println("Registration number is not present in list");
-		
-		}
-		
-	}
-	
-	public static Node display(Node start, Node end )
-	{
-		Node k=start;
-		while(k!=null)
-		{   
-		System.out.println("The registration number:"+k.regd_no+"\n"+"The mark:"+k.mark);
-		k=k.next;
-		}
-		if(start==null)
+		if (flag == 0)
 		{
-			System.out.println("Empty List");
+			System.out.println("Not found");
 		}
-		
-		return start;
 	}
-	public static void main(String[] args)
-	{
-		int c;
-		Node start = null;
-		Node end=null;
-		while (true)
-		{
-			System.out.println("****MENU*****");
-			System.out.println("1:Creation");
-			System.out.println("2:Display");
-			System.out.println("3:Insert at beginning");
-			System.out.println("4:Insert at end");
-			System.out.println("5:Insert at specific location");
-			System.out.println("6:Searching based on registration number");
-			System.out.println("7:Delete at beginning");
-			System.out.println("8:Delete at end");
-			System.out.println("9:Delete at specific location");
-		
+
+// display
+	public static void display(Node start, Node end) {
+		Node s = start;
+		System.out.println("Registration number" + " " + " Mark");
+		while (s != null) {
+			System.out.println(s.regd_no + "                      " + s.mark);
+			s = s.next;
+		}
+	}
+
+	public static void main(String[] args) {
+		Node start = new Node();
+		Node end = new Node();
+		while (true) {
+			System.out.println("******************MENU********************");
 			System.out.println("0:Exit");
-			System.out.println("Enter the choice");
-			c = in.nextInt();
-			switch (c) {
+			System.out.println("1:Creation");
+			System.out.println("2:Insert node at the beginning");
+			System.out.println("3:Insert node at the end");
+			System.out.println("4:Insert Node at specific locaton");
+			System.out.println("5:Delete node at the beginning");
+			System.out.println("6:Delete node at the end");
+			System.out.println("7:Delete node at specific location");
+			System.out.println("8:Search and update mark");
+			System.out.println("9:Display");
+			System.out.println("******************************************");
+			System.out.println("Enter  choice:");
+
+			int choice = in.nextInt();
+
+			switch (choice) {
+
 			case 0:
+				System.out.println("Thank You!");
 				System.exit(0);
 			case 1:
-				start = create(start,end);
+				start = create(start, end);
 				break;
+
 			case 2:
-				start = display(start,end);
+				start = insBeg(start, end);
 				break;
+
 			case 3:
-				start = insBeg(start,end);
+				start = insEnd(start, end);
 				break;
+
 			case 4:
-				start = insEnd(start,end);
+				start = insAny(start, end);
 				break;
+
 			case 5:
-				start = insAny(start,end);
+				start = delBeg(start, end);
 				break;
+
 			case 6:
-						Search(start);
+				start = delEnd(start, end);
 				break;
+
 			case 7:
-				start = delBeg(start,end);
+				start = delAny(start, end);
 				break;
+
 			case 8:
-				start = delEnd(start,end);
+				search(start);
 				break;
+
 			case 9:
-				start = delAny(start,end);
+				display(start, end);
 				break;
-			
+
 			default:
 				System.out.println("Wrong choice");
+
 			}
 		}
 	}
-
 }
-
