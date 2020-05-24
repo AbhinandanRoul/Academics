@@ -4,7 +4,7 @@ public class Stack {
 	
 	public static int push(int S[],int top)
 	{
-		if(top==MAX)
+		if(top==MAX-1)
 			System.out.println("Stack is full");
 		else
 		{
